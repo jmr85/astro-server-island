@@ -1,6 +1,4 @@
 ---
-import { actions, isInputError } from "astro:actions";
-
 // export const prerender = false;
 
 interface Props {
@@ -9,13 +7,14 @@ interface Props {
 
 const { post_slug } = Astro.props;
 
-const { result, error} = actions.addComment();
-const inputErrors = isInputError(error) ? error.fields : {};
+
+// const result = Astro.getActionResult(actions.addComment);
+// const inputErrors = isInputError(result?.error) ? result.error.fields : {};
 
 ---
 
-<form method="POST" action={actions.addComment} class="mb-8">
-  <input type="hidden" name="post_slug" value="{post_slug}" />
+<form class="mb-8">
+  <input type="hidden" name="post_slug" value={post_slug} />
 
   <div class="mb-4">
     <label for="name">Name:</label>
@@ -23,12 +22,11 @@ const inputErrors = isInputError(error) ? error.fields : {};
       type="text"
       id="name"
       name="name"
-      required
       class="w-full p-2 border rounded"
     />
-    {inputErrors.name &&
+    <!-- {inputErrors.name &&
     <p class="text-red-500">{inputErrors.name}</p>
-    }
+    } -->
   </div>
 
   <div class="mb-4">
@@ -37,12 +35,11 @@ const inputErrors = isInputError(error) ? error.fields : {};
       type="email"
       id="email"
       name="email"
-      required
       class="w-full p-2 border rounded"
     />
-    {inputErrors.email &&
+    <!-- {inputErrors.email &&
     <p class="text-red-500">{inputErrors.email}</p>
-    }
+    } -->
   </div>
 
   <div class="mb-4">
@@ -50,15 +47,62 @@ const inputErrors = isInputError(error) ? error.fields : {};
     <textarea
       id="message"
       name="message"
-      required
       class="w-full p-2 border rounded"
     ></textarea>
-    { inputErrors.message && (
+    <!-- { inputErrors.message && (
     <p class="text-red-500">{inputErrors.message}</p>
-    ) }
+    ) } -->
   </div>
 
   <button type="submit" class="px-4 py-2 bg-purple-600 text-white rounded">
     Add Comment
   </button>
 </form>
+
+<script>
+  import { actions, isInputError } from 'astro:actions';
+
+  const form = document.querySelector('form');
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+
+     // Limpiar errores previos
+    document.querySelectorAll('.error-msg').forEach(el => el.remove());
+
+    const { error } = await actions.addComment(formData);
+
+    // if (isInputError(error)) {
+  
+    //   if (error.fields.email) {
+    //     error.fields.email.join(', ');
+    //   }
+    // }
+
+
+    if (error) {
+      if (isInputError(error)) {
+        // Mostrar errores de validación en cada campo
+        Object.entries(error.fields).forEach(([field, message]) => {
+          const input = form.querySelector(`[name="${field}"]`);
+          if (input) {
+            const errorEl = document.createElement('p');
+            errorEl.className = 'text-red-500 error-msg';
+            errorEl.textContent = Array.isArray(message) ? message.join(', ') : message;
+            input.after(errorEl);
+          }
+        });
+      } else {
+        // Mostrar error general
+        const errorEl = document.createElement('p');
+        errorEl.className = 'text-red-500 error-msg mt-4';
+        errorEl.textContent = error.message;
+        form.append(errorEl);
+      }
+    } else {
+      form.reset();
+      alert('¡Comentario enviado con éxito!');
+    }
+
+  })
+</script>
