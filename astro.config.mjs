@@ -13,6 +13,6 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap(), solidJs(), tailwind()],
-  output: "static",
+  output: "server",
   adapter: vercel(),
 });
