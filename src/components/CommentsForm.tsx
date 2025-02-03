@@ -37,17 +37,17 @@ export default function CommentForm({post_slug}: Props) {
   };
 
   return (
-    <form class="mb-8" onSubmit={handleSubmit}>
+    <form class="mb-8 space-y-6" onSubmit={handleSubmit}>
       <input type="hidden" name="post_slug" value={post_slug} />
 
-      <div class="mb-4">
-        <label for="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          class="w-full p-2 border rounded"
-        />
+      <div class="space-y-2">
+      <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+    />
         {errors().fields?.name && (
           <p class="text-red-500 error-msg">
             {Array.isArray(errors().fields?.name)
@@ -57,14 +57,14 @@ export default function CommentForm({post_slug}: Props) {
         )}
       </div>
 
-      <div class="mb-4">
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          class="w-full p-2 border rounded"
-        />
+      <div class="space-y-2">
+      <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+    />
         {errors().fields?.email && (
           <p class="text-red-500 error-msg">
             {Array.isArray(errors().fields?.email)
@@ -74,13 +74,14 @@ export default function CommentForm({post_slug}: Props) {
         )}
       </div>
 
-      <div class="mb-4">
-        <label for="message">Comment:</label>
-        <textarea
-          id="message"
-          name="message"
-          class="w-full p-2 border rounded"
-        ></textarea>
+      <div class="space-y-2">
+      <label for="message" class="block text-sm font-medium text-gray-700">Comentario:</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
+    ></textarea>
         {errors().fields?.message && (
           <p class="text-red-500 error-msg">
             {Array.isArray(errors().fields?.message)
@@ -92,7 +93,7 @@ export default function CommentForm({post_slug}: Props) {
 
       <button
         type="submit"
-        class="px-4 py-2 bg-purple-600 text-white rounded"
+        class="w-full px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
       >
         Add Comment
       </button>

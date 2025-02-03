@@ -7,9 +7,11 @@ import vercel from '@astrojs/vercel';
 
 import solidJs from '@astrojs/solid-js';
 
+import tailwind from '@astrojs/tailwind';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap(), solidJs()],
+  integrations: [mdx(), sitemap(), solidJs(), tailwind()],
   adapter: vercel(),
 });
