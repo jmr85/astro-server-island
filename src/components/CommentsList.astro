@@ -1,0 +1,32 @@
+---
+import { actions } from "astro:actions";
+
+interface Props {
+    post_slug: string;
+}
+
+const { post_slug } = Astro.props;
+
+const { data } = await Astro.callAction(actions.getComments, post_slug)
+---
+
+<div class="space-y-4">
+    {
+        data?.map((comment) => (
+            <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow 
+                       border-l-4 border-purple-600 group">
+                <div class="flex items-baseline justify-between">
+                    <h3 class="text-lg font-semibold text-gray-800 group-hover:text-purple-700">
+                        {comment.name}
+                    </h3>
+                    <span class="text-sm text-gray-400">
+                        {comment.create_at.toLocaleDateString()}
+                    </span>
+                </div>
+                <p class="mt-3 text-gray-600 leading-relaxed">
+                    {comment.message}
+                </p>
+            </div>
+        ))
+    }
+</div>

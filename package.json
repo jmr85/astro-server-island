@@ -12,9 +12,11 @@
     "@astrojs/mdx": "^4.0.7",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.2.1",
+    "@astrojs/solid-js": "^5.0.4",
     "@astrojs/vercel": "^8.0.2",
     "@prisma/client": "^6.2.1",
     "astro": "^5.1.8",
-    "astro-server-island": "file:"
+    "astro-server-island": "file:",
+    "solid-js": "^1.9.4"
   }
 }
