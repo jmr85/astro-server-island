@@ -4,8 +4,6 @@ import BlogPost from '../../layouts/BlogPost.astro';
 import Comments from "../../components/Comments.astro";
 import { render } from 'astro:content';
 
-export const prerender = true;
-
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
 	return posts.map((post) => ({
