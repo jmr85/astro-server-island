@@ -3,8 +3,6 @@
 // import CommentsForm from './CommentsForm.tsx';
 import CommentsList from './CommentsList.astro';
 
-export const prerender = true;
-
 interface Props {
   post_slug: string;
 }
@@ -15,12 +13,5 @@ const { post_slug } = Astro.props;
 <div class="comments-section">
   <!-- <CommentsForm post_slug={post_slug} /> -->
   <!-- <CommentsForm post_slug={post_slug} client:visible/>  -->
-  <CommentsList server:defer post_slug={post_slug} > 
-    <p
-      slot="fallback"
-      class="bg-gray-300 mt-5 text-center rounded-xl p-2 animate-pulse"
-    >
-      Wait..................................................................
-    </p>
-  </CommentsList>
+  <CommentsList post_slug={post_slug} /> 
 </div>
