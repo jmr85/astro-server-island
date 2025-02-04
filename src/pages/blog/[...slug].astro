@@ -5,7 +5,7 @@ import BlogPost from '../../layouts/BlogPost.astro';
 import CommentsList from '../../components/CommentsList.astro';
 import { render } from 'astro:content';
 
-export const prerender = false;
+// export const prerender = false;
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -30,7 +30,7 @@ const { Content } = await render(post);
 		Wait...
 	  </p>
 	</Comments> -->
-	<CommentsList post_slug={post.id} > 
+	<CommentsList server:defer post_slug={post.id} > 
 		<p
 			slot="fallback"
 			class="bg-gray-300 mt-5 text-center rounded-xl p-2 animate-pulse"
