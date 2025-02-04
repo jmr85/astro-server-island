@@ -1,7 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import Comments from "../../components/Comments.astro";
+// import Comments from "../../components/Comments.astro";
+import CommentsList from '../../components/CommentsList.astro';
 import { render } from 'astro:content';
 
 export const prerender = true;
@@ -21,12 +22,20 @@ const { Content } = await render(post);
 
 <BlogPost {...post.data}>
 	<Content />
-	<Comments server:defer post_slug={post.id} > 
+	<!-- <Comments server:defer post_slug={post.id} > 
 		<p
 		slot="fallback"
 		class="bg-gray-300 mt-5 text-center rounded-xl p-2 animate-pulse"
 	  >
 		Wait...
 	  </p>
-	</Comments>
+	</Comments> -->
+	<CommentsList server:defer post_slug={post.id} > 
+		<p
+			slot="fallback"
+			class="bg-gray-300 mt-5 text-center rounded-xl p-2 animate-pulse"
+	  	>
+			Wait...
+	  	</p>
+	</CommentsList> 
 </BlogPost>
