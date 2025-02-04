@@ -14,5 +14,7 @@ export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap(), solidJs(), tailwind()],
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({
+    isr: true,
+  }),
 });
