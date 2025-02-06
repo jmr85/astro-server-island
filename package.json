@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "old:start": "astro dev",
+    "start": "HOST=0.0.0.0 PORT=8080 node ./dist/server/entry.mjs",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
