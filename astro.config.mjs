@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig,  envField } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
@@ -17,7 +17,15 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  env: {
+    schema: {
+      PORT: envField.number({ context: "server", default: 4000, access: "secret" })
+    }
+  },
   server: {
-    port: process.env.PORT ? +process.env.PORT : 4000
+    port: import.meta.env.PORT
   }
+  // server: {
+  //   port: process.env.PORT ? +process.env.PORT : 4000
+  // }
 });
