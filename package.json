@@ -26,5 +26,8 @@
     "astro-server-island": "file:",
     "solid-js": "^1.9.4",
     "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "prisma": "^6.3.1"
   }
 }
