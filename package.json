@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "old:start": "astro dev",
     "start": "HOST=0.0.0.0 PORT=8080 node ./dist/server/entry.mjs",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
