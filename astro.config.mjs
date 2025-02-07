@@ -14,8 +14,8 @@ export default defineConfig({
   site: 'https://example.com',
   integrations: [mdx(), sitemap(), solidJs(), tailwind()],
   output: "server",
-  adapter: cloudflare()
-  // server: {
-  //   port: process.env.PORT ? +process.env.PORT : 4000
-  // }
+  adapter: cloudflare(),
+  server: {
+    port: process.env.PORT ? +process.env.PORT : 4000
+  }
 });
