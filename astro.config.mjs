@@ -19,7 +19,7 @@ export default defineConfig({
   }),
   env: {
     schema: {
-      PORT: envField.number({ context: "server", default: 4000, access: "secret" })
+      PORT: envField.number({ context: "server", default: 10000, access: "secret" })
     }
   },
   server: {
