@@ -12,7 +12,21 @@ const { post_slug } = Astro.props;
 ---
 
 <div class="comments-section">
-  <CommentsForm_new post_slug={post_slug} />
+  <CommentsForm_new server:defer post_slug={post_slug}>
+    <p
+      slot="fallback"
+      class="bg-gray-300 mt-5 text-center rounded-xl p-2 animate-pulse"
+    >
+      Wait...
+    </p>
+  </CommentsForm_new>
   <!-- <CommentsForm post_slug={post_slug} client:visible/>  -->
-  <CommentsList post_slug={post_slug} /> 
+  <CommentsList server:defer post_slug={post_slug}> 
+    <p
+      slot="fallback"
+      class="bg-gray-300 mt-5 text-center rounded-xl p-2 animate-pulse"
+    >
+      Wait...
+    </p>
+  </CommentsList>
 </div>
