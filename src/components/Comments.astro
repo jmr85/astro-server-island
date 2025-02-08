@@ -1,6 +1,7 @@
 ---
 // import CommentsForm from './CommentsForm.astro';
 // import CommentsForm from './CommentsForm.tsx';
+import CommentsForm_new from './CommentsForm_new.astro';
 import CommentsList from './CommentsList.astro';
 
 interface Props {
@@ -11,7 +12,7 @@ const { post_slug } = Astro.props;
 ---
 
 <div class="comments-section">
-  <!-- <CommentsForm post_slug={post_slug} /> -->
+  <CommentsForm_new post_slug={post_slug} />
   <!-- <CommentsForm post_slug={post_slug} client:visible/>  -->
   <CommentsList post_slug={post_slug} /> 
 </div>
