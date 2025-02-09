@@ -62,7 +62,7 @@ const { data } = await Astro.callAction(actions.getComments, post_slug)
 
     export const getComments = async (post_slug) => {
    
-        const { data } = await Astro.callAction(actions.getComments, post_slug);
+        const { data } = await actions.getComments(post_slug);
 
         const content = document.querySelector('.space-y-4');
         // Limpia contenido previo (si existiera)
