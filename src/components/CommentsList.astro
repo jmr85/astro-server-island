@@ -9,11 +9,11 @@ interface Props {
 
 const { post_slug } = Astro.props;
 
-// const { data } = await Astro.callAction(actions.getComments, post_slug)
+const { data } = await Astro.callAction(actions.getComments, post_slug)
 ---
 
 <div class="space-y-4">
-    <!-- {
+    {
         data?.map((comment) => (
             <div class="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow 
                        border-l-4 border-purple-600 group">
@@ -30,87 +30,5 @@ const { post_slug } = Astro.props;
                 </p>
             </div>
         ))
-    } -->
+    }
 </div>
-
-<script define:vars="post_slug">
-    // import { actions } from "astro:actions";
-
-    // export const post_slug = post_slug;
-    // export const getComments = async (post_slug) => {
-    //     const { data } = await Astro.callAction(actions.getComments, post_slug);
-
-    //     const content = document.querySelector('.space-y-4');
-
-    //     const bg_white = document.createElement('div').classList.add('p-6', 'bg-white', 'rounded-lg', 'shadow-sm', 'hover:shadow-md', 'transition-shadow', 'border-l-4', 'border-purple-600', 'group');
-    //     const flex = document.createElement('div').classList.add('flex', 'items-baseline', 'justify-between');
-    //     document.createElement('h3').classList.add('text-lg', 'font-semibold', 'text-gray-800', 'group-hover:text-purple-700');
-    //     document.createElement('span').classList.add('text-sm', 'text-gray-400');
-    //     document.createElement('p').classList.add('mt-3', 'text-gray-600', 'leading-relaxed');
-
-    //     content.appendChild(bg_white);
-    //     bg_white.appendChild(flex);
-    //     flex.appendChild();
-
-
-    //     data.map( (comment) => {
-            
-    //     });
-    // }
-
-    import { actions } from "astro:actions";
-
-    // export const getComments = async (post_slug) => {
-   
-        const { data } = await actions.getComments(post_slug);
-
-        const content = document.querySelector('.space-y-4');
-        // Limpia contenido previo (si existiera)
-        content.innerHTML = '';
-
-        data.forEach((comment) => {
-
-            const commentContainer = document.createElement('div');
-            commentContainer.classList.add(
-                'p-6',
-                'bg-white',
-                'rounded-lg',
-                'shadow-sm',
-                'hover:shadow-md',
-                'transition-shadow',
-                'border-l-4',
-                'border-purple-600',
-                'group'
-            );
-
-            const header = document.createElement('div');
-            header.classList.add('flex', 'items-baseline', 'justify-between');
-
-            const title = document.createElement('h3');
-            title.classList.add(
-                'text-lg',
-                'font-semibold',
-                'text-gray-800',
-                'group-hover:text-purple-700'
-            );
-        
-            title.textContent = comment.author;
-
-            const dateSpan = document.createElement('span');
-            dateSpan.classList.add('text-sm', 'text-gray-400');
-         
-            dateSpan.textContent = new Date(comment.date).toLocaleDateString();
-
-            const body = document.createElement('p');
-            body.classList.add('mt-3', 'text-gray-600', 'leading-relaxed');
-            body.textContent = comment.body || '';
-
-            header.appendChild(title);
-            header.appendChild(dateSpan);
-            commentContainer.appendChild(header);
-            commentContainer.appendChild(body);
-
-            content.appendChild(commentContainer);
-        });
-    // }
-</script>
