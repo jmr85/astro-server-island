@@ -33,7 +33,7 @@ const { data } = await Astro.callAction(actions.getComments, post_slug)
     } -->
 </div>
 
-<script is:inline>
+<script define:vars="post_slug">
     // import { actions } from "astro:actions";
 
     // export const post_slug = post_slug;
