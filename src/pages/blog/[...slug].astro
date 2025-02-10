@@ -24,7 +24,7 @@ const { Content } = await render(post);
 <BlogPost {...post.data}>
 	<Content />
 	<Comments post_slug={post.id} /> 
-	<CommentsList post_slug={post.id} server:defer/>
+	<CommentsList post_slug={post.id} client:visible server:defer/>
 	<!-- <CommentsList server:defer post_slug={post.id} > 
 		<p
 			slot="fallback"
