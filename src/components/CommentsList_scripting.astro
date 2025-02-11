@@ -5,7 +5,7 @@ interface Props {
     post_slug: string;
 }
 const { post_slug } = Astro.props;
-const { data } = await Astro.callAction(actions.getComments, post_slug)
+// const { data } = await Astro.callAction(actions.getComments, post_slug)
 ---
 
 <div class="space-y-4">
@@ -29,7 +29,7 @@ const { data } = await Astro.callAction(actions.getComments, post_slug)
     } -->
 </div>
 
-<script define:vars="post_slug">
+<script define:vars={{ post_slug }}>
     // import { actions } from "astro:actions";
 
     // export const post_slug = post_slug;
