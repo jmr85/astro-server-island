@@ -90,16 +90,16 @@ const { post_slug } = Astro.props;
                 'group-hover:text-purple-700'
             );
 
-            title.textContent = comment.author;
+            title.textContent = comment.name;
 
             const dateSpan = document.createElement('span');
             dateSpan.classList.add('text-sm', 'text-gray-400');
 
-            dateSpan.textContent = new Date(comment.date).toLocaleDateString();
+            dateSpan.textContent = new Date(comment.create_at).toLocaleDateString();
 
             const body = document.createElement('p');
             body.classList.add('mt-3', 'text-gray-600', 'leading-relaxed');
-            body.textContent = comment.body || '';
+            body.textContent = comment.message || '';
 
             header.appendChild(title);
             header.appendChild(dateSpan);

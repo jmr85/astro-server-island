@@ -1,0 +1,73 @@
+---
+interface Props {
+    post_slug: string;
+}
+const { post_slug } = Astro.props;
+---
+
+<comments-section data-post-slug={post_slug}>
+    <div class="space-y-4">
+    </div>
+</comments-section>
+
+<script>
+class CommentsSection extends HTMLElement {
+    async connectedCallback() {
+        const postSlug = this.dataset.post_slug;
+        const content = this.querySelector('.space-y-4') as HTMLElement;
+        
+        try {
+            const { actions } = await import('astro:actions');
+            const { data } = await actions.getComments(postSlug as string);
+            
+            // Clear previous content
+            content.innerHTML = '';
+            
+            data?.forEach((comment) => {
+                const commentContainer = document.createElement('div');
+                commentContainer.classList.add(
+                    'p-6',
+                    'bg-white',
+                    'rounded-lg',
+                    'shadow-sm',
+                    'hover:shadow-md',
+                    'transition-shadow',
+                    'border-l-4',
+                    'border-purple-600',
+                    'group'
+                );
+
+                const header = document.createElement('div');
+                header.classList.add('flex', 'items-baseline', 'justify-between');
+
+                const title = document.createElement('h3');
+                title.classList.add(
+                    'text-lg',
+                    'font-semibold',
+                    'text-gray-800',
+                    'group-hover:text-purple-700'
+                );
+                title.textContent = comment.name;
+
+                const dateSpan = document.createElement('span');
+                dateSpan.classList.add('text-sm', 'text-gray-400');
+                dateSpan.textContent = new Date(comment.create_at).toLocaleDateString();
+
+                const body = document.createElement('p');
+                body.classList.add('mt-3', 'text-gray-600', 'leading-relaxed');
+                body.textContent = comment.message || '';
+
+                header.appendChild(title);
+                header.appendChild(dateSpan);
+                commentContainer.appendChild(header);
+                commentContainer.appendChild(body);
+                content.appendChild(commentContainer);
+            });
+        } catch (error) {
+            console.error('Error loading comments:', error);
+        }
+    }
+}
+
+customElements.define('comments-section', CommentsSection);
+</script>
