@@ -20,7 +20,6 @@ class CommentsSection extends HTMLElement {
             const { actions } = await import('astro:actions');
             const { data } = await actions.getComments(postSlug as string);
             
-            // Clear previous content
             content.innerHTML = '';
             
             data?.forEach((comment) => {
